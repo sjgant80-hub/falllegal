@@ -22,7 +22,7 @@ What you get:
 - **Advice issuance** — write opinions in the matter, sign with sha256 + adviser id + timestamp, retained 6 years per SRA 13.5.
 - **Conflict scan** — on every new matter, scan local clients/matters AND broadcast `conflict.check.request` on `fall-law` for sibling tools to respond.
 - **Q & A** — 14 one-tap T0 chips (PI limitation, CFA vs DBA, SRA conduct, Bolam, conveyancing protocol, wasted costs, Inheritance Act, s.21 vs s.8, Equality Act, ET time limits, Norwich Pharmacal, CPR 31, without prejudice, privilege types). T3 cloud cascade (Anthropic → OpenAI → Gemini → OpenRouter) using your own API key — context includes the active matter and client.
-- **Mansoor P3 audit chain** — every state change appended with prevHash + docHash + reasoning + adviser/client/matter ids. Exportable as JSON. 6-year retention.
+- **P3 audit chain** — every state change appended with prevHash + docHash + reasoning + adviser/client/matter ids. Exportable as JSON. 6-year retention.
 - **Demo matter** seeded on first launch — overwrite or purge from Firm → Settings.
 
 > **Disclaimer.** FallLegal is a tool for SRA-regulated UK solicitors. It assists with matter management, CDD, document generation, and SRA Accounts Rules tracking. It is **not regulatory submission or legal opinion software**. The firm's COLP / COFA remain responsible. Sovereign — client data never leaves the device unless you export it.
@@ -35,17 +35,17 @@ Single HTML file. Vanilla JS. Zero dependencies. No build step. IndexedDB primar
 
 ```
 falllegal/
-├── index.html      # the deliverable (~130 KB)
-├── README.md       # this file
-├── LICENSE         # MIT
-└── .nojekyll       # GitHub Pages: don't run Jekyll
+├── index.html # the deliverable (~130 KB)
+├── README.md # this file
+├── LICENSE # MIT
+└── .nojekyll # GitHub Pages: don't run Jekyll
 ```
 
 ### Architecture
 
 - **IDB stores** (9): `firms`, `advisers`, `clients`, `matters`, `advice`, `corpus`, `weaves`, `audit`, `settings`
 - **Record schemas** conform to `LAW-BUNDLE-SHARED-SCHEMA.md` (Matter / LegalClient / LegalAdviser / Firm)
-- **Audit chain** — Mansoor P3 extended: `{i, ts, tool, adviserId, clientId, matterId, action, reasoning, configVersion, prevHash, docHash, payload}`. Cap 100k entries.
+- **Audit chain** — P3 extended: `{i, ts, tool, adviserId, clientId, matterId, action, reasoning, configVersion, prevHash, docHash, payload}`. Cap 100k entries.
 - **Mesh** — `BroadcastChannel('fall-law')` for matter/client/adviser/firm sync + conflict.check.request/response. `BroadcastChannel('fall-signal')` for estate hello/ping.
 - **Boot** — open IDB → load all stores → init mesh → if no firm/adviser, render 2-step onboard → else render dashboard. Demo data seeded once on first launch (flagged `demo:true` / `_demo:true`, purgeable from Settings).
 - **KONOMI shim** — `window.KONOMI = {active, tier:'sovereign', prime:743, tool, version, check()}`.
@@ -75,17 +75,17 @@ Edit `WEAVES` array in `index.html`. Schema:
 
 ```js
 {
-  id: 'W031',                                    // sequential, unique
-  name: 'The [Pattern]',                         // evocative
-  archetype: 'Fact pattern when...',
-  agents: ['MAGNA','LIBERTY','CROWN','EQUITY',
-           'HEARTH','GUILD','ADMIRALTY','PROCEDURE'],
-  move: 'Strategic argument...',
-  authorities: ['Act YEAR s.N','Case [YEAR] Court N'],
-  opposition_move: 'They try...',
-  counter: 'Defeat by...',
-  why_it_wins: 'Deep reason...',
-  example_case: 'Actual win [YEAR]'
+ id: 'W031', // sequential, unique
+ name: 'The [Pattern]', // evocative
+ archetype: 'Fact pattern when...',
+ agents: ['MAGNA','LIBERTY','CROWN','EQUITY',
+ 'HEARTH','GUILD','ADMIRALTY','PROCEDURE'],
+ move: 'Strategic argument...',
+ authorities: ['Act YEAR s.N','Case [YEAR] Court N'],
+ opposition_move: 'They try...',
+ counter: 'Defeat by...',
+ why_it_wins: 'Deep reason...',
+ example_case: 'Actual win [YEAR]'
 }
 ```
 
@@ -113,11 +113,11 @@ node -e "const fs=require('fs');const h=fs.readFileSync('index.html','utf8');con
 Open in Chrome devtools console:
 
 ```js
-KONOMI.check()           // {ok:true, tier:'sovereign', prime:743}
-FALLLEGAL.WEAVES.length  // 30
+KONOMI.check() // {ok:true, tier:'sovereign', prime:743}
+FALLLEGAL.WEAVES.length // 30
 FALLLEGAL.T0_RULES.length // 14
 FALLLEGAL.state.matters.length
-FALLLEGAL.scanConflicts({clientName:'Patel'})  // exercise conflict scan
+FALLLEGAL.scanConflicts({clientName:'Patel'}) // exercise conflict scan
 ```
 
 ### Sovereignty doctrine
