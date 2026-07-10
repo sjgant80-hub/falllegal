@@ -8,7 +8,7 @@
 
 ## For solicitors
 
-You're a 1-10 person firm. You want matter management, conflict-checking, file retention, critical-date flagging, and a UK law research engine — without paying £80/user/month and without sending privileged data to someone's cloud.
+You're a 1-10 person firm. You want matter management, conflict-checking, file retention, critical-date flagging, and a UK law research engine — without paying TBA/month and without sending privileged data to someone's cloud.
 
 **Open `index.html` in Chrome 113+ or Edge.** Nothing installs. Nothing phones home. First launch asks you for your firm name + SRA number, then your first adviser (name, roll number, COLP/COFA toggles). That's it.
 
