@@ -1,5 +1,7 @@
 # FallLegal · sovereign matter management + UK law engine
 
+**Live:** [sjgant80-hub.github.io/falllegal](https://sjgant80-hub.github.io/falllegal/)
+
 > Single-file matter management + UK law research for 1-10 person SRA-regulated solicitor firms. One HTML file, runs entirely in your browser, no server, no telemetry, no signup. Client and matter data lives in IndexedDB on the device you opened it on.
 
 **Anchor of the law bundle** (prime 743). Sibling tools in the same bundle: `falllegalonboard` (CDD/AML/conflict register · 751), `falllegalpaper` (engagement + advice letters + precedents · 757), `falllegalpractice` (SRA Accounts Rules + time + billing · 761). They sync over `BroadcastChannel('fall-law')` and signal estate-wide on `BroadcastChannel('fall-signal')`.
